@@ -1,0 +1,57 @@
+{
+  "name": "felixarntz/relevant-tweet",
+  "description": "Allows to associate a tweet with each post, and optionally to display a link to it in the frontend.",
+  "license": "GPL-2.0-or-later",
+  "type": "wordpress-plugin",
+  "keywords": [
+    "wordpress",
+    "plugin",
+    "tweet",
+    "twitter",
+    "post",
+    "link",
+    "frontend"
+  ],
+  "homepage": "https://wordpress.org/plugins/relevant-tweet/",
+  "authors": [
+    {
+      "name": "Felix Arntz",
+      "email": "hello@felix-arntz.me",
+      "homepage": "https://felix-arntz.me",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "email": "hello@felix-arntz.me",
+    "issues": "https://github.com/felixarntz/relevant-tweet/issues"
+  },
+  "require": {
+    "composer/installers": "~1.0",
+    "php": ">=7.2"
+  },
+  "require-dev": {
+    "wp-phpunit/wp-phpunit": "^6.0",
+    "yoast/phpunit-polyfills": "^1.0"
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true
+    }
+  },
+  "scripts": {
+    "format": [
+      "composer --working-dir=build-cs install",
+      "build-cs/vendor/bin/phpcbf --standard=phpcs.xml.dist"
+    ],
+    "lint": [
+      "composer --working-dir=build-cs install",
+      "build-cs/vendor/bin/phpcs --standard=phpcs.xml.dist"
+    ],
+    "phpstan": [
+      "composer --working-dir=build-cs install",
+      "build-cs/vendor/bin/phpstan analyse --memory-limit=2048M"
+    ],
+    "test": "phpunit -c phpunit.xml.dist --verbose",
+    "test-multisite": "WP_MULTISITE=1 phpunit -c tests/phpunit/multisite.xml --verbose"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "name": "relevant-tweet",
+  "description": "Allows to associate a tweet with each post, and optionally to display a link to it in the frontend.",
+  "license": "GPL-2.0-or-later",
+  "keywords": [
+    "wordpress",
+    "plugin",
+    "tweet",
+    "twitter",
+    "post",
+    "link",
+    "frontend"
+  ],
+  "homepage": "https://wordpress.org/plugins/relevant-tweet/",
+  "author": {
+    "name": "Felix Arntz",
+    "email": "hello@felix-arntz.me",
+    "url": "https://felix-arntz.me"
+  },
+  "repository": "git+https://github.com/felixarntz/relevant-tweet.git",
+  "devDependencies": {
+    "@wordpress/env": "^10.13.0",
+    "@wordpress/scripts": "^30.6.0",
+    "fast-glob": "^3.3.2"
+  },
+  "scripts": {
+    "build": "wp-scripts build",
+    "format-js": "wp-scripts format",
+    "format-php": "wp-env run cli --env-cwd=wp-content/plugins/$(basename $(pwd)) composer format",
+    "phpstan": "wp-env run cli --env-cwd=wp-content/plugins/$(basename $(pwd)) composer phpstan",
+    "lint-js": "wp-scripts lint-js",
+    "lint-php": "wp-env run cli --env-cwd=wp-content/plugins/$(basename $(pwd)) composer lint",
+    "pretest-php": "wp-env run tests-cli --env-cwd=wp-content/plugins/$(basename $(pwd)) composer update",
+    "test-php": "wp-env run tests-cli --env-cwd=wp-content/plugins/$(basename $(pwd)) vendor/bin/phpunit -c phpunit.xml.dist --verbose",
+    "pretest-php-multisite": "wp-env run tests-cli --env-cwd=wp-content/plugins/$(basename $(pwd)) composer update",
+    "test-php-multisite": "wp-env run tests-cli --env-cwd=wp-content/plugins/$(basename $(pwd)) vendor/bin/phpunit -c tests/phpunit/multisite.xml --verbose",
+    "wp-env": "wp-env"
+  }
+}
