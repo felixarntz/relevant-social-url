@@ -38,6 +38,7 @@ function RelevantTweetSettingPanel() {
 				type="url"
 				value={ tweetUrl }
 				onChange={ onChange }
+				__nextHasNoMarginBottom
 			/>
 		</PluginDocumentSettingPanel>
 	);
