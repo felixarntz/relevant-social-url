@@ -20,8 +20,7 @@
   "repository": "git+https://github.com/felixarntz/relevant-social-url.git",
   "devDependencies": {
     "@wordpress/env": "^10.13.0",
-    "@wordpress/scripts": "^30.6.0",
-    "fast-glob": "^3.3.2"
+    "@wordpress/scripts": "^30.6.0"
   },
   "scripts": {
     "build": "wp-scripts build",
