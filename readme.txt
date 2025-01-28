@@ -33,13 +33,13 @@ This plugin doesn't come with a settings screen or options of any kind. As soon 
 
 = How can I enable the functionality on other post types? =
 
-This is very straightforward using the built-in filter `relevant_tweet_post_types`.
+This is very straightforward using the built-in filter `reltwe_post_types`.
 
 For example, the following snippet would additionally show the input field for pages and output the tweet in the frontend on pages too:
 
 `
 add_filter(
-	'relevant_tweet_post_types',
+	'reltwe_post_types',
 	function ( $post_types ) {
 		$post_types[] = 'page';
 		return $post_types;
@@ -49,17 +49,17 @@ add_filter(
 
 = How can I disable frontend output of the tweet link? =
 
-Simply use the built-in filter `relevant_tweet_frontend_output_enabled`. For example, to disable output:
+Simply use the built-in filter `reltwe_frontend_output_enabled`. For example, to disable output:
 
 `
-add_filter( 'relevant_tweet_frontend_output_enabled', '__return_false' );
+add_filter( 'reltwe_frontend_output_enabled', '__return_false' );
 `
 
 = How can I customize the frontend output of the tweet link? =
 
 You can modify the text that is displayed for the link, replacing the default of "This post also appeared on Twitter." or "This post also appeared on X.".
 
-You can do so by providing your own text via the built-in `relevant_tweet_frontend_link_text` filter.
+You can do so by providing your own text via the built-in `reltwe_frontend_link_text` filter.
 
 = Where should I submit my support request? =
 

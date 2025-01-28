@@ -18,12 +18,11 @@ import { __ } from '@wordpress/i18n';
 function RelevantTweetSettingPanel() {
 	const tweetUrl = useSelect( ( select ) => {
 		const meta = select( editorStore ).getEditedPostAttribute( 'meta' );
-		return meta.relevant_tweet_url || '';
+		return meta.reltwe_url || '';
 	} );
 
 	const { editPost } = useDispatch( editorStore );
-	const onChange = ( value ) =>
-		editPost( { meta: { relevant_tweet_url: value } } );
+	const onChange = ( value ) => editPost( { meta: { reltwe_url: value } } );
 
 	return (
 		<PluginDocumentSettingPanel

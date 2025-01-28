@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-function relevant_tweet_register_meta(): void {
+function reltwe_register_meta(): void {
 	$args = array(
 		'type'         => 'string',
 		'label'        => __( 'Relevant Tweet URL', 'relevant-tweet' ),
@@ -40,18 +40,18 @@ function relevant_tweet_register_meta(): void {
 
 	register_meta(
 		'post',
-		'relevant_tweet_url',
+		'reltwe_url',
 		$args
 	);
 }
-add_action( 'init', 'relevant_tweet_register_meta' );
+add_action( 'init', 'reltwe_register_meta' );
 
 /**
  * Registers the editor script.
  *
  * @since 1.0.0
  */
-function relevant_tweet_register_editor_script(): void {
+function reltwe_register_editor_script(): void {
 	$script_metadata = require plugin_dir_path( __FILE__ ) . 'build/index.asset.php';
 
 	wp_register_script(
@@ -62,7 +62,7 @@ function relevant_tweet_register_editor_script(): void {
 		array( 'in_footer' => true )
 	);
 }
-add_action( 'init', 'relevant_tweet_register_editor_script' );
+add_action( 'init', 'reltwe_register_editor_script' );
 
 /**
  * Conditionally enqueues the editor script.
@@ -71,7 +71,7 @@ add_action( 'init', 'relevant_tweet_register_editor_script' );
  *
  * @global string $post_type The current post type.
  */
-function relevant_tweet_enqueue_editor_script(): void {
+function reltwe_enqueue_editor_script(): void {
 	global $post_type;
 
 	$post_types = array( 'post' );
@@ -83,7 +83,7 @@ function relevant_tweet_enqueue_editor_script(): void {
 	 *
 	 * @param string[] $post_types Array of post type slugs.
 	 */
-	$post_types = (array) apply_filters( 'relevant_tweet_post_types', $post_types );
+	$post_types = (array) apply_filters( 'reltwe_post_types', $post_types );
 
 	if ( ! in_array( $post_type, $post_types, true ) ) {
 		return;
@@ -91,7 +91,7 @@ function relevant_tweet_enqueue_editor_script(): void {
 
 	wp_enqueue_script( 'relevant-tweet-ui' );
 }
-add_action( 'enqueue_block_editor_assets', 'relevant_tweet_enqueue_editor_script' );
+add_action( 'enqueue_block_editor_assets', 'reltwe_enqueue_editor_script' );
 
 /**
  * Filters the post content to add the tweet link.
@@ -101,7 +101,7 @@ add_action( 'enqueue_block_editor_assets', 'relevant_tweet_enqueue_editor_script
  * @param string|mixed $content The post content.
  * @return string|mixed The filtered post content.
  */
-function relevant_tweet_filter_post_content( $content ) {
+function reltwe_filter_post_content( $content ) {
 	if ( ! is_string( $content ) || ! is_singular() ) {
 		return $content;
 	}
@@ -113,12 +113,12 @@ function relevant_tweet_filter_post_content( $content ) {
 	 *
 	 * @param bool $enabled Whether the frontend output is enabled. Default true.
 	 */
-	$enabled = (bool) apply_filters( 'relevant_tweet_frontend_output_enabled', true );
+	$enabled = (bool) apply_filters( 'reltwe_frontend_output_enabled', true );
 	if ( ! $enabled ) {
 		return $content;
 	}
 
-	$tweet_url = get_post_meta( get_the_ID(), 'relevant_tweet_url', true );
+	$tweet_url = get_post_meta( get_the_ID(), 'reltwe_url', true );
 	if ( ! $tweet_url ) {
 		return $content;
 	}
@@ -136,7 +136,7 @@ function relevant_tweet_filter_post_content( $content ) {
 	 *
 	 * @param string $link_text The link text to use.
 	 */
-	$link_text = (string) apply_filters( 'relevant_tweet_frontend_link_text', $link_text );
+	$link_text = (string) apply_filters( 'reltwe_frontend_link_text', $link_text );
 
 	$content .= "\n\n";
 	$content .= '<p class="has-small-font-size">';
@@ -148,4 +148,4 @@ function relevant_tweet_filter_post_content( $content ) {
 
 	return $content;
 }
-add_filter( 'the_content', 'relevant_tweet_filter_post_content' );
+add_filter( 'the_content', 'reltwe_filter_post_content' );

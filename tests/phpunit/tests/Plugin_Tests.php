@@ -9,26 +9,26 @@
 class Relevant_Tweet_Tests extends WP_UnitTestCase {
 
 	public function test_hooks() {
-		$this->assertSame( 10, has_action( 'init', 'relevant_tweet_register_meta' ) );
-		$this->assertSame( 10, has_action( 'init', 'relevant_tweet_register_editor_script' ) );
-		$this->assertSame( 10, has_action( 'enqueue_block_editor_assets', 'relevant_tweet_enqueue_editor_script' ) );
-		$this->assertSame( 10, has_filter( 'the_content', 'relevant_tweet_filter_post_content' ) );
+		$this->assertSame( 10, has_action( 'init', 'reltwe_register_meta' ) );
+		$this->assertSame( 10, has_action( 'init', 'reltwe_register_editor_script' ) );
+		$this->assertSame( 10, has_action( 'enqueue_block_editor_assets', 'reltwe_enqueue_editor_script' ) );
+		$this->assertSame( 10, has_filter( 'the_content', 'reltwe_filter_post_content' ) );
 	}
 
-	public function test_relevant_tweet_register_meta() {
-		relevant_tweet_register_meta();
+	public function test_reltwe_register_meta() {
+		reltwe_register_meta();
 
-		$this->assertTrue( registered_meta_key_exists( 'post', 'relevant_tweet_url' ) );
+		$this->assertTrue( registered_meta_key_exists( 'post', 'reltwe_url' ) );
 	}
 
-	public function test_relevant_tweet_register_editor_script() {
+	public function test_reltwe_register_editor_script() {
 		global $wp_scripts;
 
 		// Store original `$wp_scripts`, then reset it.
 		$orig_wp_scripts = wp_scripts();
 		$wp_scripts      = null;
 
-		relevant_tweet_register_editor_script();
+		reltwe_register_editor_script();
 
 		$is_registered = wp_script_is( 'relevant-tweet-ui', 'registered' );
 		$is_enqueued = wp_script_is( 'relevant-tweet-ui', 'enqueued' );
@@ -41,7 +41,7 @@ class Relevant_Tweet_Tests extends WP_UnitTestCase {
 		$this->assertFalse( $is_enqueued );
 	}
 
-	public function test_relevant_tweet_enqueue_editor_script_for_post() {
+	public function test_reltwe_enqueue_editor_script_for_post() {
 		global $wp_scripts, $post_type;
 
 		$post_type = 'post';
@@ -50,8 +50,8 @@ class Relevant_Tweet_Tests extends WP_UnitTestCase {
 		$orig_wp_scripts = wp_scripts();
 		$wp_scripts      = null;
 
-		relevant_tweet_register_editor_script();
-		relevant_tweet_enqueue_editor_script();
+		reltwe_register_editor_script();
+		reltwe_enqueue_editor_script();
 
 		$is_registered = wp_script_is( 'relevant-tweet-ui', 'registered' );
 		$is_enqueued = wp_script_is( 'relevant-tweet-ui', 'enqueued' );
@@ -64,7 +64,7 @@ class Relevant_Tweet_Tests extends WP_UnitTestCase {
 		$this->assertTrue( $is_enqueued );
 	}
 
-	public function test_relevant_tweet_enqueue_editor_script_for_page() {
+	public function test_reltwe_enqueue_editor_script_for_page() {
 		global $wp_scripts, $post_type;
 
 		$post_type = 'page';
@@ -73,8 +73,8 @@ class Relevant_Tweet_Tests extends WP_UnitTestCase {
 		$orig_wp_scripts = wp_scripts();
 		$wp_scripts      = null;
 
-		relevant_tweet_register_editor_script();
-		relevant_tweet_enqueue_editor_script();
+		reltwe_register_editor_script();
+		reltwe_enqueue_editor_script();
 
 		$is_registered = wp_script_is( 'relevant-tweet-ui', 'registered' );
 		$is_enqueued = wp_script_is( 'relevant-tweet-ui', 'enqueued' );
@@ -87,7 +87,7 @@ class Relevant_Tweet_Tests extends WP_UnitTestCase {
 		$this->assertFalse( $is_enqueued );
 	}
 
-	public function test_relevant_tweet_filter_post_content() {
+	public function test_reltwe_filter_post_content() {
 		global $post, $wp_query;
 
 		$post_content = '<p>Test content.</p>';
@@ -104,9 +104,9 @@ class Relevant_Tweet_Tests extends WP_UnitTestCase {
 
 		// Without tweet URL, nothing is changed.
 		$expected_content = $post_content;
-		$this->assertSame( $expected_content, relevant_tweet_filter_post_content( $post_content ) );
+		$this->assertSame( $expected_content, reltwe_filter_post_content( $post_content ) );
 
-		update_post_meta( $post_id, 'relevant_tweet_url', 'https://twitter.com/test' );
+		update_post_meta( $post_id, 'reltwe_url', 'https://twitter.com/test' );
 
 		// With tweet URL, the tweet link is added.
 		$expected_content  = $post_content . "\n\n";
@@ -114,12 +114,12 @@ class Relevant_Tweet_Tests extends WP_UnitTestCase {
 		$expected_content .= 'This post also appeared on Twitter.';
 		$expected_content .= '<span class="screen-reader-text"> (link opens in a new tab)</span>';
 		$expected_content .= '</a></p>';
-		$this->assertSame( $expected_content, relevant_tweet_filter_post_content( $post_content ) );
+		$this->assertSame( $expected_content, reltwe_filter_post_content( $post_content ) );
 
-		add_filter( 'relevant_tweet_frontend_output_enabled', '__return_false' );
+		add_filter( 'reltwe_frontend_output_enabled', '__return_false' );
 
 		// With frontend output disabled, nothing is changed despite presence of tweet URL.
 		$expected_content = $post_content;
-		$this->assertSame( $expected_content, relevant_tweet_filter_post_content( $post_content ) );
+		$this->assertSame( $expected_content, reltwe_filter_post_content( $post_content ) );
 	}
 }
