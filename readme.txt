@@ -73,6 +73,6 @@ You can also contribute to the plugin by translating it. Simply visit [translate
 
 == Changelog ==
 
-= 1.0.0-RC =
+= 1.0.0 =
 
-* Initial release candidate.
+* Initial release.
