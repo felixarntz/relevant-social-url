@@ -3,6 +3,6 @@ includes:
 parameters:
 	level: 6
 	paths:
-		- relevant-tweet.php
+		- relevant-social-url.php
 	scanFiles:
 		- build-cs/wp-stubs.php

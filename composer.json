@@ -1,18 +1,18 @@
 {
-  "name": "felixarntz/relevant-tweet",
-  "description": "Allows to associate a tweet with each post, and optionally to display a link to it in the frontend.",
+  "name": "felixarntz/relevant-social-url",
+  "description": "Allows to associate a social media post URL with each post, and optionally to display a link to it in the frontend.",
   "license": "GPL-2.0-or-later",
   "type": "wordpress-plugin",
   "keywords": [
     "wordpress",
     "plugin",
-    "tweet",
+    "social media",
     "twitter",
     "post",
     "link",
     "frontend"
   ],
-  "homepage": "https://wordpress.org/plugins/relevant-tweet/",
+  "homepage": "https://wordpress.org/plugins/relevant-social-url/",
   "authors": [
     {
       "name": "Felix Arntz",
@@ -23,7 +23,7 @@
   ],
   "support": {
     "email": "hello@felix-arntz.me",
-    "issues": "https://github.com/felixarntz/relevant-tweet/issues"
+    "issues": "https://github.com/felixarntz/relevant-social-url/issues"
   },
   "require": {
     "composer/installers": "~1.0",

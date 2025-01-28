@@ -12,12 +12,12 @@
 		<exclude-pattern>tests/*</exclude-pattern>
 	</rule>
 	<rule ref="WordPress.WP.I18n"/>
-	<config name="text_domain" value="relevant-tweet,default"/>
+	<config name="text_domain" value="relevant-social-url,default"/>
 
 	<arg value="ps"/>
 	<arg name="extensions" value="php"/>
 
-	<file>./relevant-tweet.php</file>
+	<file>./relevant-social-url.php</file>
 	<file>./tests</file>
 
 	<!--

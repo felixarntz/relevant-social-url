@@ -2,7 +2,7 @@
 /**
  * File with WordPress stubs needed for PHPStan.
  *
- * @package RelevantTweet
+ * @package RelevantSocialURL
  */
 
 if ( ! function_exists( 'wp_register_script_module' ) ) {

@@ -2,7 +2,7 @@
 /**
  * PHPUnit bootstrap file
  *
- * @package RelevantTweet\Tests
+ * @package RelevantSocialURL\Tests
  */
 
 define( 'TESTS_PLUGIN_DIR', dirname( dirname( dirname( __FILE__ ) ) ) );
@@ -22,7 +22,7 @@ if ( false !== getenv( 'WP_TESTS_DIR' ) ) {
 
 // Force plugin to be active.
 $GLOBALS['wp_tests_options'] = array(
-	'active_plugins' => array( basename( TESTS_PLUGIN_DIR ) . '/relevant-tweet.php' ),
+	'active_plugins' => array( basename( TESTS_PLUGIN_DIR ) . '/relevant-social-url.php' ),
 );
 
 // Start up the WP testing environment.

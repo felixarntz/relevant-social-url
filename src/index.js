@@ -15,28 +15,28 @@ import { __ } from '@wordpress/i18n';
  *
  * @return {Element} Component.
  */
-function RelevantTweetSettingPanel() {
-	const tweetUrl = useSelect( ( select ) => {
+function RelevantSocialURLSettingPanel() {
+	const socialUrl = useSelect( ( select ) => {
 		const meta = select( editorStore ).getEditedPostAttribute( 'meta' );
-		return meta.reltwe_url || '';
+		return meta.relsoc_url || '';
 	} );
 
 	const { editPost } = useDispatch( editorStore );
-	const onChange = ( value ) => editPost( { meta: { reltwe_url: value } } );
+	const onChange = ( value ) => editPost( { meta: { relsoc_url: value } } );
 
 	return (
 		<PluginDocumentSettingPanel
-			name="relevant-tweet"
-			title={ __( 'Relevant Tweet', 'relevant-tweet' ) }
+			name="relevant-social-url"
+			title={ __( 'Relevant Social URL', 'relevant-social-url' ) }
 		>
 			<TextControl
-				label={ __( 'Relevant Tweet URL', 'relevant-tweet' ) }
+				label={ __( 'Relevant Social URL URL', 'relevant-social-url' ) }
 				help={ __(
-					'The URL of a tweet that is associated with this content.',
-					'relevant-tweet'
+					'The URL of a social media post that is associated with this content.',
+					'relevant-social-url'
 				) }
 				type="url"
-				value={ tweetUrl }
+				value={ socialUrl }
 				onChange={ onChange }
 				__nextHasNoMarginBottom
 			/>
@@ -44,7 +44,7 @@ function RelevantTweetSettingPanel() {
 	);
 }
 
-registerPlugin( 'relevant-tweet', {
-	render: RelevantTweetSettingPanel,
+registerPlugin( 'relevant-social-url', {
+	render: RelevantSocialURLSettingPanel,
 	icon: 'twitter',
 } );
