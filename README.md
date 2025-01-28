@@ -8,7 +8,7 @@
 
 # Relevant Social URL
 
-This plugin adds a field to the WordPress editor sidebar which allows you to paste the URL to a social media post that is associated with the post. The URL is then stored in post meta and can be used to e.g. display the relevant social media post URL in the frontend.
+This plugin adds a field to the WordPress editor sidebar which allows you to paste the URL to a social media post that is associated with the post on your WordPress site. The URL is then stored in post meta and can be used to e.g. display the relevant social media post URL in the frontend.
 
 By default, the plugin will append the link to the post content in the frontend. This can be disabled via filter though in favor of manual output elsewhere.
 
