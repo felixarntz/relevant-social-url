@@ -107,6 +107,9 @@ function relsoc_register_meta(): void {
 		'label'             => __( 'Relevant Social URL', 'relevant-social-url' ),
 		'description'       => __( 'The URL of a social media post that is associated with this content.', 'relevant-social-url' ),
 		'sanitize_callback' => static function ( $value ) {
+			if ( ! is_string( $value ) ) {
+				return '';
+			}
 			if ( ! preg_match( '#http(s?)://(.+)#i', $value ) ) {
 				return '';
 			}
