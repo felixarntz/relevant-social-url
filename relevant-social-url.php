@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function relsoc_register_meta(): void {
 	$args = array(
 		'type'         => 'string',
-		'label'        => __( 'Relevant Social URL URL', 'relevant-social-url' ),
+		'label'        => __( 'Relevant Social URL', 'relevant-social-url' ),
 		'description'  => __( 'The URL of a social media post that is associated with this content.', 'relevant-social-url' ),
 		'single'       => true,
 		'show_in_rest' => true,

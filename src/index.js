@@ -30,7 +30,7 @@ function RelevantSocialURLSettingPanel() {
 			title={ __( 'Relevant Social URL', 'relevant-social-url' ) }
 		>
 			<TextControl
-				label={ __( 'Relevant Social URL URL', 'relevant-social-url' ) }
+				label={ __( 'Relevant Social URL', 'relevant-social-url' ) }
 				help={ __(
 					'The URL of a social media post that is associated with this content.',
 					'relevant-social-url'
