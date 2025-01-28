@@ -15,12 +15,91 @@ class Relevant_Social_URL_Tests extends WP_UnitTestCase {
 		$this->assertSame( 10, has_filter( 'the_content', 'relsoc_filter_post_content' ) );
 	}
 
+	/**
+	 * @covers ::relsoc_get_providers
+	 * @dataProvider data_relsoc_get_providers
+	 */
+	public function test_relsoc_get_providers( string $social_url, string $expected_provider_name ) {
+		$matched_provider_name = '';
+		foreach ( relsoc_get_providers() as $provider_slug => $provider_data ) {
+			foreach ( $provider_data['regexes'] as $regex ) {
+				if ( preg_match( $regex, $social_url ) ) {
+					$matched_provider_name = $provider_data['name'];
+					break 2;
+				}
+			}
+		}
+
+		$this->assertSame( $expected_provider_name, $matched_provider_name );
+	}
+
+	public static function data_relsoc_get_providers(): array {
+		return array(
+			array( 'https://bsky.app/test', 'Bluesky' ),
+			array( 'http://bsky.app/test', 'Bluesky' ),
+			array( 'https://www.bsky.app/test', 'Bluesky' ),
+			array( 'https://facebook.com/test', 'Facebook' ),
+			array( 'http://facebook.com/test', 'Facebook' ),
+			array( 'https://www.facebook.com/test', 'Facebook' ),
+			array( 'https://github.com/test', 'GitHub' ),
+			array( 'http://github.com/test', 'GitHub' ),
+			array( 'http://gist.github.com/test', 'GitHub' ),
+			array( 'https://instagram.com/test', 'Instagram' ),
+			array( 'http://instagram.com/test', 'Instagram' ),
+			array( 'https://www.instagram.com/test', 'Instagram' ),
+			array( 'http://instagr.am/test', 'Instagram' ),
+			array( 'https://linkedin.com/test', 'LinkedIn' ),
+			array( 'http://linkedin.com/test', 'LinkedIn' ),
+			array( 'https://www.linkedin.com/test', 'LinkedIn' ),
+			array( 'https://soundcloud.com/test', 'SoundCloud' ),
+			array( 'http://soundcloud.com/test', 'SoundCloud' ),
+			array( 'https://www.soundcloud.com/test', 'SoundCloud' ),
+			array( 'https://open.spotify.com/test', 'Spotify' ),
+			array( 'http://open.spotify.com/test', 'Spotify' ),
+			array( 'https://play.spotify.com/test', 'Spotify' ),
+			array( 'https://threads.net/test', 'Threads' ),
+			array( 'http://threads.net/test', 'Threads' ),
+			array( 'https://www.threads.net/test', 'Threads' ),
+			array( 'https://tiktok.com/test', 'TikTok' ),
+			array( 'http://tiktok.com/test', 'TikTok' ),
+			array( 'https://www.tiktok.com/test', 'TikTok' ),
+			array( 'https://twitter.com/test', 'Twitter' ),
+			array( 'http://twitter.com/test', 'Twitter' ),
+			array( 'https://www.twitter.com/test', 'Twitter' ),
+			array( 'https://tumblr.com/test', 'Tumblr' ),
+			array( 'http://tumblr.com/test', 'Tumblr' ),
+			array( 'https://www.tumblr.com/test', 'Tumblr' ),
+			array( 'https://wordpress.org/test', 'WordPress' ),
+			array( 'http://wordpress.org/test', 'WordPress' ),
+			array( 'https://make.wordpress.org/test', 'WordPress' ),
+			array( 'https://events.wordpress.org/test', 'WordPress' ),
+			array( 'https://wordcamp.org/test', 'WordPress' ),
+			array( 'https://central.wordcamp.org/test', 'WordPress' ),
+			array( 'https://wordpress.com/test', 'WordPress.com' ),
+			array( 'http://wordpress.com/test', 'WordPress.com' ),
+			array( 'https://www.wordpress.com/test', 'WordPress.com' ),
+			array( 'https://x.com/test', 'X' ),
+			array( 'http://x.com/test', 'X' ),
+			array( 'https://www.x.com/test', 'X' ),
+			array( 'https://youtube.com/test', 'YouTube' ),
+			array( 'http://youtube.com/test', 'YouTube' ),
+			array( 'https://www.youtube.com/test', 'YouTube' ),
+			array( 'http://youtu.be/test', 'YouTube' ),
+		);
+	}
+
+	/**
+	 * @covers ::relsoc_register_meta
+	 */
 	public function test_relsoc_register_meta() {
 		relsoc_register_meta();
 
 		$this->assertTrue( registered_meta_key_exists( 'post', 'relsoc_url' ) );
 	}
 
+	/**
+	 * @covers ::relsoc_register_editor_script
+	 */
 	public function test_relsoc_register_editor_script() {
 		global $wp_scripts;
 
@@ -41,6 +120,9 @@ class Relevant_Social_URL_Tests extends WP_UnitTestCase {
 		$this->assertFalse( $is_enqueued );
 	}
 
+	/**
+	 * @covers ::relsoc_enqueue_editor_script
+	 */
 	public function test_relsoc_enqueue_editor_script_for_post() {
 		global $wp_scripts, $post_type;
 
@@ -64,6 +146,9 @@ class Relevant_Social_URL_Tests extends WP_UnitTestCase {
 		$this->assertTrue( $is_enqueued );
 	}
 
+	/**
+	 * @covers ::relsoc_enqueue_editor_script
+	 */
 	public function test_relsoc_enqueue_editor_script_for_page() {
 		global $wp_scripts, $post_type;
 
@@ -87,6 +172,9 @@ class Relevant_Social_URL_Tests extends WP_UnitTestCase {
 		$this->assertFalse( $is_enqueued );
 	}
 
+	/**
+	 * @covers ::relsoc_filter_post_content
+	 */
 	public function test_relsoc_filter_post_content() {
 		global $post, $wp_query;
 

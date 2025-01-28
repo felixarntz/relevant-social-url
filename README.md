@@ -12,6 +12,26 @@ This plugin adds a field to the WordPress editor sidebar which allows you to pas
 
 By default, the plugin will append the link to the post content in the frontend. This can be disabled via filter though in favor of manual output elsewhere.
 
+You can paste any URL into the field, regardless of social media platform. That said, the plugin will automatically recognize certain providers and adjust the message displayed in the frontend accordingly, referencing the specific provider when possible. The following providers are explicitly supported (in alphabetical order):
+
+* Bluesky
+* Facebook
+* GitHub
+* Instagram
+* LinkedIn
+* SoundCloud
+* Spotify
+* Threads
+* TikTok
+* Twitter
+* Tumblr
+* WordPress
+* WordPress.com
+* X
+* YouTube
+
+No third-party APIs are called by this plugin and no data is sent to any of these providers by the plugin.
+
 ## Installation and usage
 
 You can download the latest version from the [WordPress plugin repository](https://wordpress.org/plugins/relevant-social-url/).

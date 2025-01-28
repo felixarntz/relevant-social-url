@@ -25,6 +25,78 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Returns data for the supported social media providers.
+ *
+ * @since 1.0.0
+ *
+ * @return array<string, array<string, mixed>> Associative array of provider data, keyed by provider slug.
+ */
+function relsoc_get_providers(): array {
+	return array(
+		'bluesky'      => array(
+			'name'    => 'Bluesky',
+			'regexes' => array( '#https?://(www\.)?bsky\.app#i' ),
+		),
+		'facebook'     => array(
+			'name'    => 'Facebook',
+			'regexes' => array( '#https?://(www\.)?facebook\.com#i' ),
+		),
+		'github'       => array(
+			'name'    => 'GitHub',
+			'regexes' => array( '#https?://(gist\.)?github\.com#i' ),
+		),
+		'instagram'    => array(
+			'name'    => 'Instagram',
+			'regexes' => array( '#https?://(www\.)?instagram\.com#i', '#https?://instagr\.am#i' ),
+		),
+		'linkedin'     => array(
+			'name'    => 'LinkedIn',
+			'regexes' => array( '#https?://(www\.)?linkedin\.com#i' ),
+		),
+		'soundcloud'   => array(
+			'name'    => 'SoundCloud',
+			'regexes' => array( '#https?://(www\.)?soundcloud\.com#i' ),
+		),
+		'spotify'      => array(
+			'name'    => 'Spotify',
+			'regexes' => array( '#https?://(open|play)\.spotify\.com#i' ),
+		),
+		'threads'      => array(
+			'name'    => 'Threads',
+			'regexes' => array( '#https?://(www\.)?threads\.net#i' ),
+		),
+		'tiktok'       => array(
+			'name'    => 'TikTok',
+			'regexes' => array( '#https?://(www\.)?tiktok\.com#i' ),
+		),
+		'twitter'      => array(
+			'name'    => 'Twitter',
+			'regexes' => array( '#https?://(www\.)?twitter\.com#i' ),
+		),
+		'tumblr'       => array(
+			'name'    => 'Tumblr',
+			'regexes' => array( '#https?://(www\.)?tumblr\.com#i' ),
+		),
+		'wordpress'    => array(
+			'name'    => 'WordPress',
+			'regexes' => array( '#https?://([a-z0-9]+\.)?wordpress\.org#i', '#https?://([a-z0-9]+\.)?wordcamp\.org#i' ),
+		),
+		'wordpresscom' => array(
+			'name'    => 'WordPress.com',
+			'regexes' => array( '#https?://(www\.)?wordpress\.com#i' ),
+		),
+		'x'            => array(
+			'name'    => 'X',
+			'regexes' => array( '#https?://(www\.)?x\.com#i' ),
+		),
+		'youtube'      => array(
+			'name'    => 'YouTube',
+			'regexes' => array( '#https?://(www\.)?youtube\.com#i', '#https?://youtu\.be#i' ),
+		),
+	);
+}
+
+/**
  * Registers the post metadata.
  *
  * @since 1.0.0
@@ -123,10 +195,24 @@ function relsoc_filter_post_content( $content ) {
 		return $content;
 	}
 
-	if ( str_contains( $social_url, 'twitter.com' ) ) {
-		$link_text = __( 'This post also appeared on Twitter.', 'relevant-social-url' );
+	$matched_provider_name = '';
+	foreach ( relsoc_get_providers() as $provider_slug => $provider_data ) {
+		foreach ( $provider_data['regexes'] as $regex ) {
+			if ( preg_match( $regex, $social_url ) ) {
+				$matched_provider_name = $provider_data['name'];
+				break 2;
+			}
+		}
+	}
+
+	if ( '' !== $matched_provider_name ) {
+		$link_text = sprintf(
+			/* translators: %s: name of social media platform */
+			__( 'This post also appeared on %s.', 'relevant-social-url' ),
+			$matched_provider_name
+		);
 	} else {
-		$link_text = __( 'This post also appeared on X.', 'relevant-social-url' );
+		$link_text = __( 'This post also appeared on social media.', 'relevant-social-url' );
 	}
 
 	/**
