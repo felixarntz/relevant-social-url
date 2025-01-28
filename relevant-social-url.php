@@ -103,11 +103,17 @@ function relsoc_get_providers(): array {
  */
 function relsoc_register_meta(): void {
 	$args = array(
-		'type'         => 'string',
-		'label'        => __( 'Relevant Social URL', 'relevant-social-url' ),
-		'description'  => __( 'The URL of a social media post that is associated with this content.', 'relevant-social-url' ),
-		'single'       => true,
-		'show_in_rest' => true,
+		'type'              => 'string',
+		'label'             => __( 'Relevant Social URL', 'relevant-social-url' ),
+		'description'       => __( 'The URL of a social media post that is associated with this content.', 'relevant-social-url' ),
+		'sanitize_callback' => static function ( $value ) {
+			if ( ! preg_match( '#http(s?)://(.+)#i', $value ) ) {
+				return '';
+			}
+			return sanitize_url( $value );
+		},
+		'single'            => true,
+		'show_in_rest'      => true,
 	);
 
 	register_meta(

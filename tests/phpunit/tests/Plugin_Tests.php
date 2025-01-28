@@ -98,6 +98,24 @@ class Relevant_Social_URL_Tests extends WP_UnitTestCase {
 	}
 
 	/**
+	 * @covers ::relsoc_register_meta
+	 */
+	public function test_relsoc_register_meta_sanitization() {
+		relsoc_register_meta();
+
+		$post_id = self::factory()->post->create();
+
+		update_post_meta( $post_id, 'relsoc_url', 'https://valid-url-format.com/test/' );
+		$this->assertSame( 'https://valid-url-format.com/test/', get_post_meta( $post_id, 'relsoc_url', true ) );
+
+		update_post_meta( $post_id, 'relsoc_url', 'ftp://invalid-protocol/' );
+		$this->assertSame( '', get_post_meta( $post_id, 'relsoc_url', true ) );
+
+		update_post_meta( $post_id, 'relsoc_url', 'not-a-url' );
+		$this->assertSame( '', get_post_meta( $post_id, 'relsoc_url', true ) );
+	}
+
+	/**
 	 * @covers ::relsoc_register_editor_script
 	 */
 	public function test_relsoc_register_editor_script() {
