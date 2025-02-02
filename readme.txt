@@ -77,7 +77,7 @@ add_filter( 'relsoc_frontend_output_enabled', '__return_false' );
 
 = How can I customize the frontend output of the social media post link? =
 
-You can modify the text that is displayed for the link, replacing the default of "This post also appeared on Twitter." or "This post also appeared on X.".
+You can modify the text that is displayed for the link, replacing the default of "This post also appeared on {social media platform}.".
 
 You can do so by providing your own text via the built-in `relsoc_frontend_link_text` filter.
 
