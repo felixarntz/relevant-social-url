@@ -39,6 +39,7 @@ function RelevantSocialURLSettingPanel() {
 				value={ socialUrl }
 				onChange={ onChange }
 				__nextHasNoMarginBottom
+				__next40pxDefaultSize
 			/>
 		</PluginDocumentSettingPanel>
 	);

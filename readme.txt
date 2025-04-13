@@ -7,7 +7,7 @@ Author URI:   https://felix-arntz.me
 Contributors: flixos90
 Donate link:  https://felix-arntz.me/wordpress-plugins/
 Tested up to: 6.8
-Stable tag:   1.0.0
+Stable tag:   1.0.1
 License:      GPLv2 or later
 License URI:  https://www.gnu.org/licenses/gpl-2.0.html
 Tags:         social media, twitter, post, link, frontend
@@ -92,6 +92,10 @@ If you have ideas to improve the plugin or to solve a bug, feel free to raise an
 You can also contribute to the plugin by translating it. Simply visit [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/relevant-social-url) to get started.
 
 == Changelog ==
+
+= 1.0.1 =
+
+* Avoid WordPress 6.8 deprecation warning by opting in into new 40px size for block editor UI components.
 
 = 1.0.0 =
 
