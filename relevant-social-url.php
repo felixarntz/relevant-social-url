@@ -11,7 +11,7 @@
  * Description: Allows to associate a social media post URL with each post, and optionally to display a link to it in the frontend.
  * Version: 1.0.1
  * Requires at least: 6.0
- * Requires PHP: 7.2
+ * Requires PHP: 7.4
  * Author: Felix Arntz
  * Author URI: https://felix-arntz.me
  * License: GPLv2 or later
