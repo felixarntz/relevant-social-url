@@ -18,6 +18,9 @@
     "url": "https://felix-arntz.me"
   },
   "repository": "git+https://github.com/felixarntz/relevant-social-url.git",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "devDependencies": {
     "@wordpress/env": "^10.13.0",
     "@wordpress/scripts": "^30.14.0"
@@ -34,5 +37,6 @@
     "pretest-php-multisite": "wp-env run tests-cli --env-cwd=wp-content/plugins/$(basename $(pwd)) composer update",
     "test-php-multisite": "wp-env run tests-cli --env-cwd=wp-content/plugins/$(basename $(pwd)) vendor/bin/phpunit -c tests/phpunit/multisite.xml --verbose",
     "wp-env": "wp-env"
-  }
+  },
+  "packageManager": "pnpm@11.1.3"
 }
