@@ -9,6 +9,7 @@
 /.distignore
 /.editorconfig
 /.eslintignore
+/eslint.config.js
 /.eslintrc.js
 /.gitattributes
 /.gitignore
