@@ -5,4 +5,4 @@ parameters:
 	paths:
 		- relevant-social-url.php
 	scanFiles:
-		- build-cs/wp-stubs.php
+		- tools/php/lint/vendor/php-stubs/wordpress-stubs/wordpress-stubs.php
