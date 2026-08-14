@@ -3,12 +3,21 @@
  */
 import { registerPlugin } from '@wordpress/plugins';
 import {
-	PluginDocumentSettingPanel,
+	PluginDocumentSettingPanel as EditorPluginDocumentSettingPanel,
 	store as editorStore,
 } from '@wordpress/editor';
+import { PluginDocumentSettingPanel as EditPostPluginDocumentSettingPanel } from '@wordpress/edit-post';
 import { TextControl } from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
+
+/*
+ * Prefer the editor package export (current WordPress). Fall back to edit-post
+ * for WordPress 6.1–6.5, where PluginDocumentSettingPanel was only available
+ * on wp.editPost.
+ */
+const PluginDocumentSettingPanel =
+	EditorPluginDocumentSettingPanel || EditPostPluginDocumentSettingPanel;
 
 /**
  * Renders the plugin's editor sidebar panel.

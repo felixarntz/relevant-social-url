@@ -128,11 +128,41 @@ function relsoc_register_meta(): void {
 add_action( 'init', 'relsoc_register_meta' );
 
 /**
+ * Registers a react-jsx-runtime polyfill when WordPress does not provide one.
+ *
+ * Modern @wordpress/scripts builds depend on the `react-jsx-runtime` script
+ * handle, which WordPress only registers from 6.6+. On older versions the
+ * built editor script would never load because a missing dependency is
+ * skipped. This registers a minimal polyfill backed by React.createElement
+ * only when the core handle is absent, so current WordPress keeps using the
+ * native implementation.
+ *
+ * @since 1.0.2
+ */
+function relsoc_maybe_register_react_jsx_runtime_polyfill(): void {
+	if ( wp_script_is( 'react-jsx-runtime', 'registered' ) ) {
+		return;
+	}
+
+	$polyfill_metadata = require plugin_dir_path( __FILE__ ) . 'build/react-jsx-runtime-polyfill.asset.php';
+
+	wp_register_script(
+		'react-jsx-runtime',
+		plugin_dir_url( __FILE__ ) . 'build/react-jsx-runtime-polyfill.js',
+		$polyfill_metadata['dependencies'],
+		$polyfill_metadata['version'],
+		array( 'in_footer' => true )
+	);
+}
+
+/**
  * Registers the editor script.
  *
  * @since 1.0.0
  */
 function relsoc_register_editor_script(): void {
+	relsoc_maybe_register_react_jsx_runtime_polyfill();
+
 	$script_metadata = require plugin_dir_path( __FILE__ ) . 'build/index.asset.php';
 
 	wp_register_script(
