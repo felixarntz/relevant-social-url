@@ -7,7 +7,7 @@ Author URI:   https://felix-arntz.me
 Contributors: flixos90
 Donate link:  https://felix-arntz.me/wordpress-plugins/
 Tested up to: 7.1
-Stable tag:   1.0.1
+Stable tag:   1.0.2
 License:      GPLv2 or later
 License URI:  https://www.gnu.org/licenses/gpl-2.0.html
 Tags:         social media, twitter, post, link, frontend
@@ -92,6 +92,12 @@ If you have ideas to improve the plugin or to solve a bug, feel free to raise an
 You can also contribute to the plugin by translating it. Simply visit [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/relevant-social-url) to get started.
 
 == Changelog ==
+
+= 1.0.2 =
+
+* Fix UI from not working in WP pre-6.6 by polyfilling `react-jsx-runtime` and conditionally loading component from `wp-edit-post` instead of `wp-editor`.
+* Update dependencies to latest versions, modernize repository setup, use PNPM for JS management.
+* Add E2E test coverage.
 
 = 1.0.1 =
 
